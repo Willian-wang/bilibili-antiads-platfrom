@@ -5,10 +5,16 @@ import java.util.HashMap;
 public class StandardReponse<T> {
     private int reponseCode;
     private String responseInf;
-    private T Data;
+    private T data;
 
     public StandardReponse(T t){
-        this.Data = t;
+
+        if(t instanceof String && t.equals("success")){
+            setStatus(10000);
+            this.data = null;
+        }else{
+            this.data = t;
+        }
     }
 
     public int getReponseCode() {
@@ -28,22 +34,31 @@ public class StandardReponse<T> {
     }
 
     public T getData() {
-        return Data;
+        return data;
     }
 
     public void setData(T data) {
-        Data = data;
+        this.data = data;
     }
 
-    static final HashMap<Integer,String> map = new HashMap<>(){{
-        map.put(10000,"OK");
-        map.put(20000,"Not authority");
-        map.put(30000,"Request is too quick");
-        map.put(40000,"Not found");
-        map.put(50000,"ServerError");
+    static final HashMap<Integer,String> statusMap = new HashMap<>();
+    {
+        statusMap.put(10000,"OK");
+        statusMap.put(20000,"Not authority");
+        statusMap.put(30000,"Request is too quick");
+        statusMap.put(40000,"Not found");
+        statusMap.put(50000,"ServerError");
     }
 
-    };
+
+    private void setStatus(int code){
+            responseInf = statusMap.get(code);
+            if(responseInf == null){
+                throw new IllegalArgumentException("无此状态码");
+            }else {
+                reponseCode = code;
+            }
+    }
 
 
 }
