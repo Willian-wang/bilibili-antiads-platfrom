@@ -13,6 +13,7 @@ public class StandardReponse<T> {
             setStatus(10000);
             this.data = null;
         }else{
+            setStatus(10000);
             this.data = t;
         }
     }

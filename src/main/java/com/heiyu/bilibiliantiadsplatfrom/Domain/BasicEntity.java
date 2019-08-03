@@ -1,6 +1,8 @@
 package com.heiyu.bilibiliantiadsplatfrom.Domain;
 
-import java.security.Timestamp;
+import com.heiyu.bilibiliantiadsplatfrom.Common.IdGenerator;
+
+import java.sql.Timestamp;
 
 /**
  * @ClassName: BasicEntity
@@ -42,6 +44,13 @@ public class BasicEntity {
 
     public void setRemove(boolean remove) {
         this.remove = remove;
+    }
+
+    public static void setBasicInf(BasicEntity basicInf){
+        basicInf.setCreateTime(new java.sql.Timestamp(System.currentTimeMillis()));
+        basicInf.setUpdateTime(new java.sql.Timestamp(System.currentTimeMillis()));
+        basicInf.setId(IdGenerator.getId());
+        basicInf.setRemove(false);
     }
 
     private Long id;

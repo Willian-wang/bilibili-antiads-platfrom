@@ -1,6 +1,7 @@
 package com.heiyu.bilibiliantiadsplatfrom.Common;
 
 import com.heiyu.bilibiliantiadsplatfrom.Domain.Uid;
+import com.heiyu.bilibiliantiadsplatfrom.Domain.UidLog;
 
 /**
  * @ClassName: NameSpace
@@ -19,4 +20,10 @@ public class Namespace {
         return "uid::common";
     }
 
+    public static String getUidLogNamespace(UidLog uidLog){
+        return "uidlog::"+uidLog.getSession();
+    }
+    public static String getUidLogNamespace(){
+        return "uidlog::common";
+    }
 }

@@ -13,6 +13,10 @@
 2. 在指定的API下，使用Requestbody向服务器发起请Ajax请求即可。（请求不可以为空）
 3. 后期加入身份验证后需要使用cookies，添加SessionId字段即可。
 
+哔哩哔哩直播间封禁脚本:  
+https://github.com/HolynnChen/somejs
+
+
 ### 二. API列表
 #### 1. 已实现
 <table boder="1" >
@@ -20,7 +24,8 @@
 <td><b>路径</b></td>
 <td><b>方法</b></td>
 <td><b>解释</b></td>
-<td><b>字段</b></td>
+<td><b>请求字段</b></td>
+<td><b>返回字段</b></td>
 </tr>
 <tr>
 <td rowspan="3">/banneduid</td>
@@ -32,6 +37,13 @@
     "text":["String",String]
     //广告君生前所发的文本
 }</pre></td>
+<td><pre>{
+    "reponseCode":"int"
+    //返回状态码
+    "responseInf":"String"
+    //状态码对应的状态信息
+    "data":null
+}</pre></td>
 </tr>
 <tr>
 <td>GET</td>
@@ -39,6 +51,20 @@
 <td><pre>{
     "id":"Long"
     //这个是服务器内部生成的主键ID
+    //若为空则返回所有ID
+    //不为空则返回此ID之后上传的ID
+}</pre></td>
+<td><pre>{
+    "reponseCode":"int"
+    "responseInf":"String"
+    "data":[
+        {
+            "id":"Long"
+            //:服务器生成的主键ID
+            "uid":"String"
+            //广告君的Uid
+        }
+    ]
 }</pre></td>
 </tr>
 </tr>
@@ -49,8 +75,24 @@
     "Uid":"String"
     //被认为是广告君的无辜群众的UID
 }</pre></td>
+<td><pre>{
+    "reponseCode":"int"
+    //返回状态码
+    "responseInf":"String"
+    //状态码对应的状态信息
+    "data":null
+}</pre></td>
 </tr>
 </table>
+
+#### 2. 状态码对应表
+|状态码|解释|
+|:--:|:--:|
+|10000|"OK"|
+|20000|"Not authority"|
+|30000|"Request is too quick"|
+|40000|"Not found"|
+|50000|"ServerError"|
 
 ### 三、项目情况
 
